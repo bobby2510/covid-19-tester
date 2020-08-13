@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script src="script.js" defer></script>
+    <style>
+        .active
+        {
+            box-shadow: 0px 0px 10px black;
+        }
+        .yes
+        {
+          box-shadow: 0px 0px 10px red;
+        }
+        .no
+        {
+          box-shadow: 0px 0px 10px green;
+
+        }
+    </style>
+    <title>Covid-19 Detector</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark" >
+        <div class="container" style="width: 800px;">
+          <span class="navbar-brand mb-0 h1">Covid-19 Virtual Testing Tool</span>
+          <a class="navbar-brand mb-0 " href="#"><small>About Model</small></a>
+          <a class="navbar-brand mb-0 mr-auto" href="#"><small>About Developer</small></a>
+        </div>
+      </nav>
+      <div class='container' style="width: 800px;">
+        <div class="card text-center mt-4">
+            <div class="card-header">
+                Covid-19 Disease Detector
+            </div>
+            <div class="alert alert-success alert-dismissible m-2 mt-4 text-center" id="result_panel" style="display: none;" role="alert">
+              <button type="button" class="close" id='change' data-dismiss="alert">&times;</button>
+              <h2 style="text-decoration-line: underline;">Results of Our Model Prediction</h2>
+              <table width="80%">
+                <tr>
+                  <td id="result_label1"></td>
+                  <strong><td id="result_value1"></td></strong>
+                </tr>
+                <tr>
+                  <td id="result_label2"></td>
+                  <td id="result_value2"></td>
+                </tr>
+              </table>
+              <p id='final_statement'></p>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Select your symptoms</h5>
+              <h6 id="error_message" class="mt-4" style="color: red;"></h6>
+              <div style="width: 600px;" class="mr-auto ml-auto p-2">
+                <div style="border-bottom: 1px solid lightgrey;" class="d-flex justify-content-between align-items-center">
+                  <div><span class='mt-2 text-muted'>Do you have Fever? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="fever"><input type="radio" name="fever" style="display: none;" id="fever_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="fever"><input type="radio" style="display: none;" name="fever" id="fever_radio">No</label> 
+                  </div>
+              </div>
+              <div style="border-bottom: 1px solid lightgrey;" class="pt-2 d-flex justify-content-between align-items-center">
+                <div><span class='mt-2 text-muted'>Do you feel Tiredness? &nbsp; &nbsp;</span></div>
+                <div>
+                  <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="tiredness"><input type="radio" name="tiredness" style="display: none;" id="tiredness_radio" >Yes</label> &nbsp;
+                  <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="tiredness"><input type="radio" style="display: none;" name="tiredness" id="tiredness_radio">No</label> 
+                </div>
+            </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;" >
+                   <div><span class='mt-4 text-muted'>Do you have Dry Cough? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="cough"><input type="radio" name="cough" style="display: none;" id="cough_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="cough"><input type="radio" style="display: none;" name="cough" id="cough_radio">No</label> 
+                  </div>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;">
+                  <div><span class='mt-4 text-muted'>Do you have Difficulty in Breathing? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="breathing"><input type="radio" name="breathing" style="display: none;" id="breathing_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="breathing"><input type="radio" style="display: none;" name="breathing" id="breathing_radio">No</label> 
+                  </div>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;">
+                  <div><span class='mt-4 text-muted'>Do you have Sore throat? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="throat"><input type="radio" name="throat" style="display: none;" id="throat_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="throat"><input type="radio" style="display: none;" name="throat" id="throat_radio">No</label> 
+                  </div>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;">
+                  <div><span class='mt-4 text-muted'>Do you have Body pains? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="pains"><input type="radio" name="pains" style="display: none;" id="pains_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="pains"><input type="radio" style="display: none;" name="pains" id="pains_radio">No</label> 
+                  </div>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;">
+                  <div><span class='mt-4 text-muted'>Do you have Runny nose? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="nose"><input type="radio" name="nose" style="display: none;" id="nose_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="nose"><input type="radio" style="display: none;" name="nose" id="nose_radio">No</label> 
+                  </div>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;">
+                  <div><span class='mt-4 text-muted'>Do you have Diahrrhea? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="diahrrehea"><input type="radio" name="diahrrehea" style="display: none;" id="diahrrehea_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="diahrrehea"><input type="radio" style="display: none;" name="diahrrehea" id="diahrrehea_radio">No</label> 
+                  </div>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid lightgrey;">
+                  <div><span class='mt-4 text-muted'>Have you Loss smell detection? &nbsp; &nbsp;</span></div>
+                  <div>
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey; " id="smell"><input type="radio" name="smell" style="display: none;" id="smell_radio" >Yes</label> &nbsp;
+                    <label class="pt-1 pb-1 pl-3 pr-3" style="border:1px solid lightgrey;" id="smell"><input type="radio" style="display: none;" name="smell" id="smell_radio">No</label> 
+                  </div>
+                </div>
+              </div>
+              <br>
+              <span onclick="detect_covid()" class="btn btn-success">Detect Covid-19</span>
+            </div>
+            <br>
+            <div class="card-footer text-muted">
+              <span >Developed By CoderBobby</span><br>
+              <a  href="https://www.youtube.com/channel/UCoXQDML17ann6UjNHxXYXQw"><img src="yt.png" alt="yt" style="width: 50px;">Believer 01</a>
+            </div>
+          </div>
+      </div>
+      <br>
+      <br>
+  </body>
+</html>

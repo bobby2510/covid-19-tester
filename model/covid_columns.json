@@ -1,0 +1,9 @@
+{"columns": ["fever",
+     "tiredness", 
+     "dry_cough", 
+     "difficulty_in_breathing",
+      "sore_throat", 
+      "body_pains",
+       "runny_nose", 
+       "diarrhea",
+        "loss_of_smell"]}
